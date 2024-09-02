@@ -200,7 +200,7 @@ We can visualize the expected value of the number of lung cancer patients among 
 
 
 ```{=html}
-<div><p>[</p><div class="clay-sequential" style="margin-left:10%;width:110%;"><div><script>vegaEmbed(document.currentScript.parentElement, {"encoding":{"x":{"field":"x","type":"nominal"},"y":{"field":"y","type":"nominal"}},"usermeta":{"embedOptions":{"renderer":"svg"}},"width":400,"background":"floralwhite","layer":[{"mark":{"type":"bar","tooltip":true},"encoding":{"x":{"field":"with-cancer","type":"nominal"},"y":{"field":"count","type":"quantitative"}},"data":{"values":"$group-name,count,with-cancer\n3,413,3\n4,407,4\n2,154,2\n1,24,1\n0,2,0\n","format":{"type":"csv"}}}],"height":300,"data":{"url":"assignments.hw1.q1_files\/1.csv","format":{"type":"csv"}}});</script></div><div><p>Mean of samples: 3.199</p></div></div><p>]</p></div>
+<div><p>[</p><div class="clay-sequential" style="margin-left:10%;width:110%;"><div><script>vegaEmbed(document.currentScript.parentElement, {"encoding":{"x":{"field":"x","type":"nominal"},"y":{"field":"y","type":"nominal"}},"usermeta":{"embedOptions":{"renderer":"svg"}},"width":400,"background":"floralwhite","layer":[{"mark":{"type":"bar","tooltip":true},"encoding":{"x":{"field":"with-cancer","type":"nominal"},"y":{"field":"count","type":"quantitative"}},"data":{"values":"$group-name,count,with-cancer\n2,143,2\n3,429,3\n4,405,4\n1,22,1\n0,1,0\n","format":{"type":"csv"}}}],"height":300,"data":{"url":"assignments.hw1.q1_files\/1.csv","format":{"type":"csv"}}});</script></div><div><p>Mean of samples: 3.215</p></div></div><p>]</p></div>
 ```
 
 

@@ -23,9 +23,9 @@ number-depth: 0
 ```clojure
 (ns assignments.hw1.q3-5
   (:require
-    [assignments.hw1.utils :refer :all]
-    [fastmath.core :as m]
-    [fastmath.random :as rand]))
+   [assignments.hw1.utils :refer :all]
+   [fastmath.core :as m]
+   [fastmath.random :as rand]))
 ```
 :::
 
@@ -295,7 +295,7 @@ number-depth: 0
   <path d="M 468 41.4375 L 470 41.4375 L 470 469.847656 L 468 469.847656 Z M 468 41.4375 "/>
 </clipPath>
 </defs>
-<g id="surface76">
+<g id="surface16">
 <rect x="0" y="0" width="504" height="504" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
 <g clip-path="url(#clip1)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:0.533489;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(92.156863%,92.156863%,92.156863%);stroke-opacity:1;stroke-miterlimit:10;" d="M 37.152344 389.847656 L 498.519531 389.847656 "/>
@@ -489,8 +489,8 @@ number-depth: 0
       prob (pnorm z)
       p (- 1 prob)]
   (answer
-    (str "Percentage of healthy persons misclassified as having a fever: "
-         (* 100 (m/approx p)) "%")))
+   (str "Percentage of healthy persons misclassified as having a fever: "
+        (* 100 (m/approx p)) "%")))
 ```
 :::
 
@@ -513,6 +513,38 @@ The `z->x` function converts a value from a standard normal distribution to a no
 $$x = \mu + \sigma z$$
 
 This is used to find the value corresponding to a given probability in a normal distribution.
+
+
+::: {.sourceClojure}
+```clojure
+(comment
+  (defn norm-plot-pval
+    "Creates a ggplot2 plot for the temperature distribution with p-value shading."
+    [p-val mean-temp sd-temp direction]
+    (let [z-score (inv-normal (if (= direction :right) (- 1 p-val) p-val))
+          threshold (z->x z-score mean-temp sd-temp)
+          xlim [(- mean-temp (* 5 sd-temp)) (+ mean-temp (* 5 sd-temp))]]
+      (-> (ggplot :data (tc/dataset {:x xlim}) (aes :x 'x))
+          (r+ (stat_function :fun dnorm :args [mean-temp sd-temp]
+                             :geom "area" :fill "lightblue" :alpha 0.7)
+              (stat_function :fun dnorm :args [mean-temp sd-temp]
+                             :xlim (if (= direction :right)
+                                     [threshold (second xlim)]
+                                     [(first xlim) threshold])
+                             :geom "area" :fill "red" :alpha 0.3)
+              (geom_vline :xintercept threshold :color "red" :linetype "dashed")
+              (geom_text :x threshold :y 0 :angle 90 :hjust -0.5 :vjust -0.5
+                         :label (str "Threshold: " (format "%.2f" threshold)))
+              (labs :title "Distribution of X"
+                    :subtitle (str "Percent of data in red: " (* 100 p-val) "%")
+                    :x "X"
+                    :y "Density")
+              (scale_x_continuous :limits xlim)
+              (theme_minimal))
+          plot->svg))))
+```
+:::
+
 
 
 ::: {.sourceClojure}
@@ -768,7 +800,7 @@ This is used to find the value corresponding to a given probability in a normal 
   <path d="M 321 41.4375 L 323 41.4375 L 323 469.847656 L 321 469.847656 Z M 321 41.4375 "/>
 </clipPath>
 </defs>
-<g id="surface81">
+<g id="surface21">
 <rect x="0" y="0" width="504" height="504" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
 <g clip-path="url(#clip1)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:0.533489;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(92.156863%,92.156863%,92.156863%);stroke-opacity:1;stroke-miterlimit:10;" d="M 37.152344 389.847656 L 498.519531 389.847656 "/>
@@ -972,8 +1004,8 @@ This is used to find the value corresponding to a given probability in a normal 
       x (z->x z mu sd)
       samples (rnorm 1000 mu sd)]
   (answer
-    (str "Minimum temperature with a rate of misclassifying healthy patients at 10%: "
-         (m/approx x))))
+   (str "Minimum temperature with a rate of misclassifying healthy patients at 10%: "
+        (m/approx x))))
 ```
 :::
 
@@ -1262,7 +1294,7 @@ This is used to find the value corresponding to a given probability in a normal 
   <path d="M 295 41.4375 L 297 41.4375 L 297 469.847656 L 295 469.847656 Z M 295 41.4375 "/>
 </clipPath>
 </defs>
-<g id="surface86">
+<g id="surface26">
 <rect x="0" y="0" width="504" height="504" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
 <g clip-path="url(#clip1)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:0.533489;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(92.156863%,92.156863%,92.156863%);stroke-opacity:1;stroke-miterlimit:10;" d="M 52.152344 401.5625 L 498.519531 401.5625 "/>
@@ -1506,8 +1538,8 @@ This is used to find the value corresponding to a given probability in a normal 
       prob (pnorm z)
       p (- 1 prob)]
   (answer
-    (str "Probability that the price is more than $1000 one year after purchasing: "
-         (* 100 (m/approx p 4)) "%")))
+   (str "Probability that the price is more than $1000 one year after purchasing: "
+        (* 100 (m/approx p 4)) "%")))
 ```
 :::
 
@@ -1803,7 +1835,7 @@ This is used to find the value corresponding to a given probability in a normal 
   <path d="M 355 41.4375 L 358 41.4375 L 358 469.847656 L 355 469.847656 Z M 355 41.4375 "/>
 </clipPath>
 </defs>
-<g id="surface91">
+<g id="surface31">
 <rect x="0" y="0" width="504" height="504" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
 <g clip-path="url(#clip1)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:0.533489;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(92.156863%,92.156863%,92.156863%);stroke-opacity:1;stroke-miterlimit:10;" d="M 52.152344 401.5625 L 498.519531 401.5625 "/>
@@ -2069,8 +2101,8 @@ This is used to find the value corresponding to a given probability in a normal 
 (let [mu 980 sd 40 x1 960 x2 1060 z1 (x->z x1 mu sd)
       z2 (x->z x2 mu sd) p1 (pnorm z1) p2 (pnorm z2) p (- p2 p1)]
   (answer
-    (str "Probability that the price is between $960 and $1060 after purchase for one year: "
-         (* 100 (m/approx p 3)) "%")))
+   (str "Probability that the price is between $960 and $1060 after purchase for one year: "
+        (* 100 (m/approx p 3)) "%")))
 ```
 :::
 

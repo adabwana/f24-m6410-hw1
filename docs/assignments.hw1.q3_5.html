@@ -253,9 +253,9 @@ window.Quarto = {
 <div class="sourceClojure">
 <div class="sourceCode" id="cb1"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">ns</span> assignments.hw1.q3<span class="dv">-5</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  (<span class="at">:require</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    [assignments.hw1.utils <span class="at">:refer</span> <span class="at">:all</span>]</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    [fastmath.core <span class="at">:as</span> m]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    [fastmath.random <span class="at">:as</span> <span class="kw">rand</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>   [assignments.hw1.utils <span class="at">:refer</span> <span class="at">:all</span>]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>   [fastmath.core <span class="at">:as</span> m]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>   [fastmath.random <span class="at">:as</span> <span class="kw">rand</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <section id="question-3" class="level2">
@@ -513,7 +513,7 @@ window.Quarto = {
   <path d="M 468 41.4375 L 470 41.4375 L 470 469.847656 L 468 469.847656 Z M 468 41.4375 "></path>
 </clippath>
 </defs>
-<g id="surface76">
+<g id="surface16">
 <rect x="0" y="0" width="504" height="504" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"></rect>
 <g clip-path="url(#clip1)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:0.533489;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(92.156863%,92.156863%,92.156863%);stroke-opacity:1;stroke-miterlimit:10;" d="M 37.152344 389.847656 L 498.519531 389.847656 "></path>
@@ -702,8 +702,8 @@ window.Quarto = {
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>      prob (pnorm z)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      p (<span class="kw">-</span> <span class="dv">1</span> prob)]</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  (answer</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">str</span> <span class="st">"Percentage of healthy persons misclassified as having a fever: "</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>         (<span class="kw">*</span> <span class="dv">100</span> (m/approx p)) <span class="st">"%"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>   (<span class="kw">str</span> <span class="st">"Percentage of healthy persons misclassified as having a fever: "</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        (<span class="kw">*</span> <span class="dv">100</span> (m/approx p)) <span class="st">"%"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><span style="color: black; font-size: 1.5em;"><strong>Percentage of healthy persons misclassified as having a fever: 0.0%</strong></span></p>
@@ -722,8 +722,35 @@ window.Quarto = {
 <p><span class="math display">\[x = \mu + \sigma z\]</span></p>
 <p>This is used to find the value corresponding to a given probability in a normal distribution.</p>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb4"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [mu <span class="fl">98.02</span> sd <span class="fl">0.62</span> p-val <span class="fl">0.1</span>]</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  (norm-plot-pval p-val mu sd <span class="at">:right</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">comment</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  (<span class="bu">defn</span><span class="fu"> norm-plot-pval</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Creates a ggplot2 plot for the temperature distribution with p-value shading."</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    [p-val mean-temp sd-temp direction]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">let</span> [z-score (inv-normal (<span class="kw">if</span> (<span class="kw">=</span> direction <span class="at">:right</span>) (<span class="kw">-</span> <span class="dv">1</span> p-val) p-val))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>          threshold (z-&gt;x z-score mean-temp sd-temp)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>          xlim [(<span class="kw">-</span> mean-temp (<span class="kw">*</span> <span class="dv">5</span> sd-temp)) (<span class="kw">+</span> mean-temp (<span class="kw">*</span> <span class="dv">5</span> sd-temp))]]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      (<span class="kw">-&gt;</span> (ggplot <span class="at">:data</span> (tc/dataset {<span class="at">:x</span> xlim}) (aes <span class="at">:x</span> <span class="at">'x</span>))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>          (r+ (stat_function <span class="at">:fun</span> dnorm <span class="at">:args</span> [mean-temp sd-temp]</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                             <span class="at">:geom</span> <span class="st">"area"</span> <span class="at">:fill</span> <span class="st">"lightblue"</span> <span class="at">:alpha</span> <span class="fl">0.7</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>              (stat_function <span class="at">:fun</span> dnorm <span class="at">:args</span> [mean-temp sd-temp]</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                             <span class="at">:xlim</span> (<span class="kw">if</span> (<span class="kw">=</span> direction <span class="at">:right</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                                     [threshold (<span class="kw">second</span> xlim)]</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                                     [(<span class="kw">first</span> xlim) threshold])</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                             <span class="at">:geom</span> <span class="st">"area"</span> <span class="at">:fill</span> <span class="st">"red"</span> <span class="at">:alpha</span> <span class="fl">0.3</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>              (geom_vline <span class="at">:xintercept</span> threshold <span class="at">:color</span> <span class="st">"red"</span> <span class="at">:linetype</span> <span class="st">"dashed"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>              (geom_text <span class="at">:x</span> threshold <span class="at">:y</span> <span class="dv">0</span> <span class="at">:angle</span> <span class="dv">90</span> <span class="at">:hjust</span> -<span class="fl">0.5</span> <span class="at">:vjust</span> -<span class="fl">0.5</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                         <span class="at">:label</span> (<span class="kw">str</span> <span class="st">"Threshold: "</span> (<span class="kw">format</span> <span class="st">"%.2f"</span> threshold)))</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>              (labs <span class="at">:title</span> <span class="st">"Distribution of X"</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">:subtitle</span> (<span class="kw">str</span> <span class="st">"Percent of data in red: "</span> (<span class="kw">*</span> <span class="dv">100</span> p-val) <span class="st">"%"</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                    <span class="at">:x</span> <span class="st">"X"</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>                    <span class="at">:y</span> <span class="st">"Density"</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>              (scale_x_continuous <span class="at">:limits</span> xlim)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>              (theme_minimal))</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>          plot-&gt;svg))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceClojure">
+<div class="sourceCode" id="cb5"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [mu <span class="fl">98.02</span> sd <span class="fl">0.62</span> p-val <span class="fl">0.1</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  (norm-plot-pval p-val mu sd <span class="at">:right</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="504pt" height="504pt" viewbox="0 0 504 504" version="1.1">
@@ -968,7 +995,7 @@ window.Quarto = {
   <path d="M 321 41.4375 L 323 41.4375 L 323 469.847656 L 321 469.847656 Z M 321 41.4375 "></path>
 </clippath>
 </defs>
-<g id="surface81">
+<g id="surface21">
 <rect x="0" y="0" width="504" height="504" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"></rect>
 <g clip-path="url(#clip1)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:0.533489;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(92.156863%,92.156863%,92.156863%);stroke-opacity:1;stroke-miterlimit:10;" d="M 37.152344 389.847656 L 498.519531 389.847656 "></path>
@@ -1152,18 +1179,18 @@ window.Quarto = {
 </svg>
 
 <div class="sourceClojure">
-<div class="sourceCode" id="cb5"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">defn</span><span class="fu"> rnorm </span>[n mu sd]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">let</span> [dist (rand/distribution <span class="at">:normal</span> {<span class="at">:mu</span> mu <span class="at">:sd</span> sd})]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">repeatedly</span> n #(rand/sample dist))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">defn</span><span class="fu"> rnorm </span>[n mu sd]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">let</span> [dist (rand/distribution <span class="at">:normal</span> {<span class="at">:mu</span> mu <span class="at">:sd</span> sd})]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">repeatedly</span> n #(rand/sample dist))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb6"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [mu <span class="fl">98.02</span> sd <span class="fl">0.62</span> p <span class="fl">0.1</span> one-minus-p (<span class="kw">-</span> <span class="dv">1</span> p)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>      z (inv-normal one-minus-p)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      x (z-&gt;x z mu sd)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      samples (rnorm <span class="dv">1000</span> mu sd)]</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  (answer</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">str</span> <span class="st">"Minimum temperature with a rate of misclassifying healthy patients at 10%: "</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>         (m/approx x))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [mu <span class="fl">98.02</span> sd <span class="fl">0.62</span> p <span class="fl">0.1</span> one-minus-p (<span class="kw">-</span> <span class="dv">1</span> p)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>      z (inv-normal one-minus-p)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>      x (z-&gt;x z mu sd)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>      samples (rnorm <span class="dv">1000</span> mu sd)]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  (answer</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>   (<span class="kw">str</span> <span class="st">"Minimum temperature with a rate of misclassifying healthy patients at 10%: "</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        (m/approx x))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><span style="color: black; font-size: 1.5em;"><strong>Minimum temperature with a rate of misclassifying healthy patients at 10%: 98.81</strong></span></p>
@@ -1177,8 +1204,8 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="a-financial-analyst-states-that-the-price-of-a-long-term-1000-government-bond-one-year-after-purchasing-is-normally-distributed-with-an-expected-value-980-and-a-standard-deviation-40."><em>5) A financial analyst states that the price of a long-term $1000 government bond (one year after purchasing) is normally distributed with an expected value $980 and a standard deviation $40.</em></h4>
 <p><strong><em>a) Find the chance that the price is more than $1000 one year after purchasing. </em></strong></p>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb7"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [mu <span class="dv">980</span> sd <span class="dv">40</span> x <span class="dv">1000</span>]</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  (norm-plot-threshold x mu sd <span class="at">:right</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [mu <span class="dv">980</span> sd <span class="dv">40</span> x <span class="dv">1000</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  (norm-plot-threshold x mu sd <span class="at">:right</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="504pt" height="504pt" viewbox="0 0 504 504" version="1.1">
@@ -1444,7 +1471,7 @@ window.Quarto = {
   <path d="M 295 41.4375 L 297 41.4375 L 297 469.847656 L 295 469.847656 Z M 295 41.4375 "></path>
 </clippath>
 </defs>
-<g id="surface86">
+<g id="surface26">
 <rect x="0" y="0" width="504" height="504" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"></rect>
 <g clip-path="url(#clip1)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:0.533489;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(92.156863%,92.156863%,92.156863%);stroke-opacity:1;stroke-miterlimit:10;" d="M 52.152344 401.5625 L 498.519531 401.5625 "></path>
@@ -1678,21 +1705,21 @@ window.Quarto = {
 </svg>
 
 <div class="sourceClojure">
-<div class="sourceCode" id="cb8"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [mu <span class="dv">980</span> sd <span class="dv">40</span> x <span class="dv">1000</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>      z (x-&gt;z x mu sd)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>      prob (pnorm z)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>      p (<span class="kw">-</span> <span class="dv">1</span> prob)]</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  (answer</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">str</span> <span class="st">"Probability that the price is more than $1000 one year after purchasing: "</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>         (<span class="kw">*</span> <span class="dv">100</span> (m/approx p <span class="dv">4</span>)) <span class="st">"%"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [mu <span class="dv">980</span> sd <span class="dv">40</span> x <span class="dv">1000</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>      z (x-&gt;z x mu sd)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>      prob (pnorm z)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      p (<span class="kw">-</span> <span class="dv">1</span> prob)]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  (answer</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>   (<span class="kw">str</span> <span class="st">"Probability that the price is more than $1000 one year after purchasing: "</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        (<span class="kw">*</span> <span class="dv">100</span> (m/approx p <span class="dv">4</span>)) <span class="st">"%"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><span style="color: black; font-size: 1.5em;"><strong>Probability that the price is more than $1000 one year after purchasing: 30.85%</strong></span></p>
 </blockquote>
 <p><strong><em>b) What is the chance that the price is between $960 and $1060 after purchase for one year?</em></strong></p>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb9"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [mu <span class="dv">980</span> sd <span class="dv">40</span> x1 <span class="dv">960</span> x2 <span class="dv">1060</span>]</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  (norm-plot-thresh-btw x1 x2 mu sd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [mu <span class="dv">980</span> sd <span class="dv">40</span> x1 <span class="dv">960</span> x2 <span class="dv">1060</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  (norm-plot-thresh-btw x1 x2 mu sd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="504pt" height="504pt" viewbox="0 0 504 504" version="1.1">
@@ -1970,7 +1997,7 @@ window.Quarto = {
   <path d="M 355 41.4375 L 358 41.4375 L 358 469.847656 L 355 469.847656 Z M 355 41.4375 "></path>
 </clippath>
 </defs>
-<g id="surface91">
+<g id="surface31">
 <rect x="0" y="0" width="504" height="504" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"></rect>
 <g clip-path="url(#clip1)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:0.533489;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(92.156863%,92.156863%,92.156863%);stroke-opacity:1;stroke-miterlimit:10;" d="M 52.152344 401.5625 L 498.519531 401.5625 "></path>
@@ -2228,11 +2255,11 @@ window.Quarto = {
 </svg>
 
 <div class="sourceClojure">
-<div class="sourceCode" id="cb10"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [mu <span class="dv">980</span> sd <span class="dv">40</span> x1 <span class="dv">960</span> x2 <span class="dv">1060</span> z1 (x-&gt;z x1 mu sd)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>      z2 (x-&gt;z x2 mu sd) p1 (pnorm z1) p2 (pnorm z2) p (<span class="kw">-</span> p2 p1)]</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  (answer</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">str</span> <span class="st">"Probability that the price is between $960 and $1060 after purchase for one year: "</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>         (<span class="kw">*</span> <span class="dv">100</span> (m/approx p <span class="dv">3</span>)) <span class="st">"%"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [mu <span class="dv">980</span> sd <span class="dv">40</span> x1 <span class="dv">960</span> x2 <span class="dv">1060</span> z1 (x-&gt;z x1 mu sd)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>      z2 (x-&gt;z x2 mu sd) p1 (pnorm z1) p2 (pnorm z2) p (<span class="kw">-</span> p2 p1)]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  (answer</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>   (<span class="kw">str</span> <span class="st">"Probability that the price is between $960 and $1060 after purchase for one year: "</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        (<span class="kw">*</span> <span class="dv">100</span> (m/approx p <span class="dv">3</span>)) <span class="st">"%"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><span style="color: black; font-size: 1.5em;"><strong>Probability that the price is between $960 and $1060 after purchase for one year: 66.9%</strong></span></p>
