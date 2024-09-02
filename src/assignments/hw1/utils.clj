@@ -123,6 +123,11 @@
     [plot (md (str "Mean of samples: " (m/approx mean-value 4)))]))
 
 ;; Normal distribution
+(defn rnorm [n mu sd]
+  (let [dist (rand/distribution :normal {:mu mu :sd sd})]
+    (repeatedly n #(rand/sample dist))))
+
+
 (defn pnorm
   "Calculates the cumulative distribution function (CDF) of the standard normal distribution.
    z: z-score"

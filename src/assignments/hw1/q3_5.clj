@@ -75,9 +75,10 @@ This is used to find the value corresponding to a given probability in a normal 
   (norm-plot-pval p-val mu sd :right))
 
 
-(defn rnorm [n mu sd]
-  (let [dist (rand/distribution :normal {:mu mu :sd sd})]
-    (repeatedly n #(rand/sample dist))))
+(comment
+  (defn rnorm [n mu sd]
+    (let [dist (rand/distribution :normal {:mu mu :sd sd})]
+      (repeatedly n #(rand/sample dist)))))
 
 
 (let [mu 98.02 sd 0.62 p 0.1 one-minus-p (- 1 p)
