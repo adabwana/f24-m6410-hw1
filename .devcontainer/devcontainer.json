@@ -1,0 +1,57 @@
+{
+  "name": "Clojure Development Environment",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "betterthantomorrow.calva",
+        "streetsidesoftware.code-spell-checker",
+        "shaunlebron.vscode-parinfer",
+        "quarto.quarto"
+      ],
+      "settings": {
+        "[clojure]": {
+          "editor.autoClosingBrackets": "never",
+          "editor.autoClosingOvertype": "never",
+          "editor.formatOnPaste": false
+        },
+        "calva.paredit.defaultKeyMap": "original",
+        "terminal.integrated.shell.linux": "/bin/bash"
+      },
+      "keybindings": [
+        {
+          "key": "ctrl+shift+alt+l",
+          "command": "editor.action.formatDocument",
+          "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+        }
+      ]
+    }
+  },
+  "remoteUser": "vscode",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": "false",
+      "username": "vscode",
+      "upgradePackages": "true"
+    }
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace/probability,type=bind,consistency=cached",
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
+  ],
+  "runArgs": [
+    "--gpus", "all",
+    "-e", "DISPLAY=${localEnv:DISPLAY}",
+    "--net", "host"
+  ],
+  "forwardPorts": [
+    1971, 1972
+  ],
+  "appPort": [
+    1971, 1972
+  ],
+  "postCreateCommand": "echo 'export DISPLAY=host.docker.internal:0' >> ~/.bashrc && quarto check install"
+}
