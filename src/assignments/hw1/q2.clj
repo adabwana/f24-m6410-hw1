@@ -74,16 +74,12 @@
 (md
  "The `x->z` function converts a value from a normal distribution to a standard normal distribution:
 
-$$z = \\frac{x - \\mu}{\\sigma}$$
-
-This is used to find probabilities for normally distributed variables.")
+$$z = \\frac{x - \\mu}{\\sigma}$$")
 
 (md
  "The `pnorm` function calculates the cumulative distribution function for a standard normal distribution:
 
-$$\\Phi(z) = \\frac{1}{\\sqrt{2\\pi}} \\int_{-\\infty}^z e^{-t^2/2} dt$$
-
-This is used to find probabilities for normally distributed variables.")
+$$\\Phi(z) = \\frac{1}{\\sqrt{2\\pi}} \\int_{-\\infty}^z e^{-t^2/2} dt$$")
 
 
 (let [mu 42 sd 2 x 42
