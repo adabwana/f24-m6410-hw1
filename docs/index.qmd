@@ -1,0 +1,58 @@
+
+---
+format:
+  html: {toc: true, toc-depth: 3, theme: cosmo, number-sections: false, output-file: index.html}
+fontsize: 0.9em
+code-block-background: true
+include-in-header: {text: '<link rel = "icon" href = "data:," />'}
+toc-title-numbers: false
+number-depth: 0
+
+---
+<style></style><style>.printedClojure .sourceCode {
+  background-color: transparent;
+  border-style: none;
+}
+</style><style>.clay-limit-image-width .clay-image {max-width: 100%}
+.clay-side-by-side .sourceCode {margin: 0}
+.clay-side-by-side {margin: 1em 0}
+</style>
+<script src="index_files/md-default0.js" type="text/javascript"></script><script src="index_files/md-default1.js" type="text/javascript"></script>
+
+
+### Jaryt Salvo
+**Date:** **9/1/24**
+
+**Fall 2024 | MATH6410 Probability Theory**
+
+*************
+
+This project contains solutions to Homework 1 from the Probability Theory course (Math 6410) using Clojure. The code provided here demonstrates a functional programming approach to solving various probability problems, including binomial distributions, normal distributions, and calculations involving expected values and standard deviations.
+
+The code is organized into different sections corresponding to each homework problem, with detailed explanations of the logic and mathematical steps involved. By using Clojure and its associated libraries, such as `scicloj.clay` for rendering, `tablecloth` for data manipulation, and `fastmath` for mathematical operations.
+
+#### Utils
+
+The `utils.clj` file contains various utility functions and helpers used throughout the homework solutions. It includes:
+
+- Formatting functions for markdown and LaTeX rendering
+- Statistical functions for binomial and normal distributions
+- Visualization functions for creating plots
+- Helper functions for calculations and data manipulation
+
+These utilities are designed to streamline the problem-solving process and provide reusable components for statistical computations and visualizations.
+
+The code in the `src/assignments` folder was rendered with [Clay](https://scicloj.github.io/clay/) and deployed with [Github Pages](https://pages.github.com/).
+
+**Note:** Plots rendered from `ggplots` are not displayed correctly. The first `ggplot` per question displays nicely. The others, alas.
+
+
+```{=html}
+<div style="background-color:grey;height:2px;width:100%;"></div>
+```
+
+
+
+```{=html}
+<div><pre><small><small>source: <a href="https://github.com/adabwana/f24-m6410-hw1/blob/main/src/index.clj">src/index.clj</a></small></small></pre></div>
+```
