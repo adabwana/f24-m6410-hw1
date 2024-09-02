@@ -16,21 +16,4 @@
     :clean-up-target-dir true}))
 
 (comment
-  ;with index.md clay wont find in src and complains about docs/_book
   (build))
-
-
-(comment
-  (defn build []                                              ;for clay 63
-    (clay/make!
-      {:format              [:quarto :html]
-       :book                {:title "Support Vector Machine"}
-       :base-source-path    "src"
-       :base-target-path    "docs"                            ;default
-       :subdirs-to-sync     ["notebooks" "data"]
-       :clean-up-target-dir true
-       :source-path         [
-                             ;"index.clj"                      ;index.md
-                             "assignment/problem9-5.ipynb"]})))
-
-

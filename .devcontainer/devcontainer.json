@@ -10,7 +10,8 @@
         "betterthantomorrow.calva",
         "streetsidesoftware.code-spell-checker",
         "shaunlebron.vscode-parinfer",
-        "quarto.quarto"
+        "quarto.quarto",
+        "REditorSupport.r"  // Add this line for R support
       ],
       "settings": {
         "[clojure]": {

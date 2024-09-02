@@ -28,6 +28,16 @@ RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.450/qua
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Install R
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    r-base \
+    r-base-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install R packages
+RUN R -e "install.packages(c('ggplot2', 'Rserve', 'svglite'), repos='https://cran.rstudio.com/')"
+
 # Create a non-root user and set up sudo privileges
 RUN useradd -ms /bin/bash vscode \
     && echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers

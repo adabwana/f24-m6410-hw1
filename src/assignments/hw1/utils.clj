@@ -1,14 +1,14 @@
 (ns assignments.hw1.utils
   (:require
-    [clojisr.v1.applications.plotting :refer [plot->svg]]
-    [clojisr.v1.r :refer [r+ require-r]]
-    [fastmath.core :as m]
-    [fastmath.random :as rand]
-    [fastmath.stats :as s]
-    [scicloj.hanamicloth.v1.api :as haclo]
-    [scicloj.kindly.v4.api :as kindly]
-    [scicloj.kindly.v4.kind :as kind]
-    [tablecloth.api :as tc]))
+   [clojisr.v1.applications.plotting :refer [plot->svg]]
+   [clojisr.v1.r :refer [r+ require-r]]
+   [fastmath.core :as m]
+   [fastmath.random :as rand]
+   [fastmath.stats :as s]
+   [scicloj.hanamicloth.v1.api :as haclo]
+   [scicloj.kindly.v4.api :as kindly]
+   [scicloj.kindly.v4.kind :as kind]
+   [tablecloth.api :as tc]))
 
 (kind/md "## Utils")
 
@@ -100,13 +100,13 @@
    p: probability of success on each trial"
   [n p]
   (let [data (tc/dataset
-               {:k           (mapv str (range (inc n)))
-                :probability (map #(pmf-binomial % n p) (range (inc n)))
-                :cumulative  (reductions + (map #(pmf-binomial % n p) (range (inc n))))})]
+              {:k           (mapv str (range (inc n)))
+               :probability (map #(pmf-binomial % n p) (range (inc n)))
+               :cumulative  (reductions + (map #(pmf-binomial % n p) (range (inc n))))})]
     (-> data
         (haclo/layer-bar
-          {:=x :k
-           :=y :probability}))))
+         {:=x :k
+          :=y :probability}))))
 
 (defn binomial-dist-viz [sample-size n p]
   (let [binomial-dist (rand/distribution :binomial {:p p :trials n})
@@ -117,8 +117,8 @@
                  (tc/add-column :with-cancer #(map str (:$group-name %))))
         plot (-> data
                  (haclo/layer-bar
-                   {:=x :with-cancer
-                    :=y :count}))
+                  {:=x :with-cancer
+                   :=y :count}))
         mean-value (s/mean samples)]
     [plot (md (str "Mean of samples: " (m/approx mean-value 4)))]))
 
@@ -168,18 +168,31 @@
    (dnorm z 0 1)))
 
 ;; Plots
+(defn normal-dist-viz [mu sd]
+  (let [x-range (range (- mu (* 4 sd)) (+ mu (* 4 sd)) 0.1)
+        norm-dist (rand/distribution :normal {:mu mu :sd sd})
+        data (tc/dataset
+              {:x x-range
+               :y (map #(rand/pdf norm-dist %) x-range)})]
+    (-> data
+        (haclo/layer-area
+         {:=x          :x
+          :=y          :y
+          :=mark-color "lightblue"}))))
+
+
 (defn norm-plot-threshold
   "Creates a ggplot2 plot for the temperature distribution."
-  [threshold mean-temp sd-temp shade-direction]
-  (let [z-score (/ (- threshold mean-temp) sd-temp)
+  [threshold mu sd shade-direction]
+  (let [z-score (/ (- threshold mu) sd)
         percentage (* 100 (if (= shade-direction :right)
                             (- 1 (pnorm z-score))
                             (pnorm z-score)))
-        xlim [(- mean-temp (* 5 sd-temp)) (+ mean-temp (* 5 sd-temp))]]
+        xlim [(- mu (* 5 sd)) (+ mu (* 5 sd))]]
     (-> (ggplot :data (tc/dataset {:x xlim}) (aes :x 'x))
-        (r+ (stat_function :fun dnorm :args [mean-temp sd-temp]
+        (r+ (stat_function :fun dnorm :args [mu sd]
                            :geom "area" :fill "lightblue" :alpha 0.7)
-            (stat_function :fun dnorm :args [mean-temp sd-temp]
+            (stat_function :fun dnorm :args [mu sd]
                            :xlim (if (= shade-direction :right)
                                    [threshold (second xlim)]
                                    [(first xlim) threshold])
