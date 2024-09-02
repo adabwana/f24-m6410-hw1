@@ -1,16 +1,16 @@
 (ns assignments.hw1.q3-5
   (:require
-    [assignments.hw1.utils :refer :all]
-    [fastmath.core :as m]
-    [fastmath.random :as rand]))
+   [assignments.hw1.utils :refer :all]
+   [fastmath.core :as m]
+   [fastmath.random :as rand]))
 
 
 (question
-  "Question 3 to 5")
+ "Question 3 to 5")
 (question
-  "Question 3")
+ "Question 3")
 (sub-question
-  "3) Assume that healthy human body temperatures are normally distributed with a mean of 98.02 degrees Fahrenheit and a standard deviation of 0.62 degrees Fahrenheit. A hospital uses 101 degrees Fahrenheit as the lowest body temperature (laser body temperature reading) criterion of having a fever. What percentage of healthy persons would be misclassified as having a fever with this criterion? Explain.")
+ "3) Assume that healthy human body temperatures are normally distributed with a mean of 98.02 degrees Fahrenheit and a standard deviation of 0.62 degrees Fahrenheit. A hospital uses 101 degrees Fahrenheit as the lowest body temperature (laser body temperature reading) criterion of having a fever. What percentage of healthy persons would be misclassified as having a fever with this criterion? Explain.")
 
 
 (let [threshold 101 mean-temp 98.02 sd-temp 0.62]
@@ -22,14 +22,14 @@
       prob (pnorm z)
       p (- 1 prob)]
   (answer
-    (str "Percentage of healthy persons misclassified as having a fever: "
-         (* 100 (m/approx p)) "%")))
+   (str "Percentage of healthy persons misclassified as having a fever: "
+        (* 100 (m/approx p)) "%")))
 
 
 (question
-  "Question 4")
+ "Question 4")
 (sub-question
-  "4) In Question 3, if a physician wants to select a minimum temperature with a rate of misclassifying healthy patients at 10%. What should that criterion be?")
+ "4) In Question 3, if a physician wants to select a minimum temperature with a rate of misclassifying healthy patients at 10%. What should that criterion be?")
 
 (md "The `inv-normal` function calculates the inverse cumulative distribution function for a standard normal distribution:
 
@@ -42,6 +42,34 @@ This is used to find the value corresponding to a given probability in a normal 
 $$x = \\mu + \\sigma z$$
 
 This is used to find the value corresponding to a given probability in a normal distribution.")
+
+
+(comment
+  (defn norm-plot-pval
+    "Creates a ggplot2 plot for the temperature distribution with p-value shading."
+    [p-val mean-temp sd-temp direction]
+    (let [z-score (inv-normal (if (= direction :right) (- 1 p-val) p-val))
+          threshold (z->x z-score mean-temp sd-temp)
+          xlim [(- mean-temp (* 5 sd-temp)) (+ mean-temp (* 5 sd-temp))]]
+      (-> (ggplot :data (tc/dataset {:x xlim}) (aes :x 'x))
+          (r+ (stat_function :fun dnorm :args [mean-temp sd-temp]
+                             :geom "area" :fill "lightblue" :alpha 0.7)
+              (stat_function :fun dnorm :args [mean-temp sd-temp]
+                             :xlim (if (= direction :right)
+                                     [threshold (second xlim)]
+                                     [(first xlim) threshold])
+                             :geom "area" :fill "red" :alpha 0.3)
+              (geom_vline :xintercept threshold :color "red" :linetype "dashed")
+              (geom_text :x threshold :y 0 :angle 90 :hjust -0.5 :vjust -0.5
+                         :label (str "Threshold: " (format "%.2f" threshold)))
+              (labs :title "Distribution of X"
+                    :subtitle (str "Percent of data in red: " (* 100 p-val) "%")
+                    :x "X"
+                    :y "Density")
+              (scale_x_continuous :limits xlim)
+              (theme_minimal))
+          plot->svg))))
+
 
 (let [mu 98.02 sd 0.62 p-val 0.1]
   (norm-plot-pval p-val mu sd :right))
@@ -57,16 +85,16 @@ This is used to find the value corresponding to a given probability in a normal 
       x (z->x z mu sd)
       samples (rnorm 1000 mu sd)]
   (answer
-    (str "Minimum temperature with a rate of misclassifying healthy patients at 10%: "
-         (m/approx x))))
+   (str "Minimum temperature with a rate of misclassifying healthy patients at 10%: "
+        (m/approx x))))
 
 
 (question
-  "Question 5")
+ "Question 5")
 (sub-question
-  "5) A financial analyst states that the price of a long-term $1000 government bond (one year after purchasing) is normally distributed with an expected value $980 and a standard deviation $40.")
+ "5) A financial analyst states that the price of a long-term $1000 government bond (one year after purchasing) is normally distributed with an expected value $980 and a standard deviation $40.")
 (sub-sub
-  "a) Find the chance that the price is more than $1000 one year after purchasing. ")
+ "a) Find the chance that the price is more than $1000 one year after purchasing. ")
 
 (let [mu 980 sd 40 x 1000]
   (norm-plot-threshold x mu sd :right))
@@ -77,12 +105,12 @@ This is used to find the value corresponding to a given probability in a normal 
       prob (pnorm z)
       p (- 1 prob)]
   (answer
-    (str "Probability that the price is more than $1000 one year after purchasing: "
-         (* 100 (m/approx p 4)) "%")))
+   (str "Probability that the price is more than $1000 one year after purchasing: "
+        (* 100 (m/approx p 4)) "%")))
 
 
 (sub-sub
-  "b) What is the chance that the price is between $960 and $1060 after purchase for one year?")
+ "b) What is the chance that the price is between $960 and $1060 after purchase for one year?")
 
 (let [mu 980 sd 40 x1 960 x2 1060]
   (norm-plot-thresh-btw x1 x2 mu sd))
@@ -90,5 +118,5 @@ This is used to find the value corresponding to a given probability in a normal 
 (let [mu 980 sd 40 x1 960 x2 1060 z1 (x->z x1 mu sd)
       z2 (x->z x2 mu sd) p1 (pnorm z1) p2 (pnorm z2) p (- p2 p1)]
   (answer
-    (str "Probability that the price is between $960 and $1060 after purchase for one year: "
-         (* 100 (m/approx p 3)) "%")))
+   (str "Probability that the price is between $960 and $1060 after purchase for one year: "
+        (* 100 (m/approx p 3)) "%")))
