@@ -9,7 +9,7 @@
 
 The code in the `src/assignments` folder were rendered with [Clay](https://scicloj.github.io/clay/) and deployed with [Github Pages](https://pages.github.com/). 
 
-## **Please click [HERE](https://adabwana.github.io/f24-m6410-hw1/) to view the workbook.**
+## **[Please click HERE to view the workbook](https://adabwana.github.io/f24-m6410-hw1/).**
 
 This project contains solutions to Homework 1 from the Probability Theory course (Math 6410) using Clojure. The code provided here demonstrates a functional programming approach to solving various probability problems, including binomial distributions, normal distributions, and calculations involving expected values and standard deviations.
 
