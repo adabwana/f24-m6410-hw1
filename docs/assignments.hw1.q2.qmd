@@ -74,12 +74,6 @@ We can visualize the Normal Distribution with the following function:
 
 ***a) Find and interpret the chance that the length of a randomly selected rattlesnake is longer than 42 inches.***
 
-The `x->z` function converts a value from a normal distribution to a standard normal distribution:
-
-$$z = \frac{x - \mu}{\sigma}$$
-
-This is used to find probabilities for normally distributed variables.
-
 
 ::: {.sourceClojure}
 ```clojure
@@ -383,7 +377,7 @@ This is used to find probabilities for normally distributed variables.
   <path d="M 269 41.4375 L 271 41.4375 L 271 469.847656 L 269 469.847656 Z M 269 41.4375 "/>
 </clipPath>
 </defs>
-<g id="surface1">
+<g id="surface196">
 <rect x="0" y="0" width="504" height="504" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
 <g clip-path="url(#clip1)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:0.533489;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(92.156863%,92.156863%,92.156863%);stroke-opacity:1;stroke-miterlimit:10;" d="M 42.152344 401.5625 L 498.519531 401.5625 "/>
@@ -593,6 +587,14 @@ This is used to find probabilities for normally distributed variables.
 ```
 
 
+The `x->z` function converts a value from a normal distribution to a standard normal distribution:
+
+$$z = \frac{x - \mu}{\sigma}$$
+
+The `pnorm` function calculates the cumulative distribution function for a standard normal distribution:
+
+$$\Phi(z) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^z e^{-t^2/2} dt$$
+
 
 ::: {.sourceClojure}
 ```clojure
@@ -610,12 +612,6 @@ This is used to find probabilities for normally distributed variables.
 > <span style="color: black; font-size: 1.5em;">**Probability that the length of a randomly selected rattlesnake is longer than 42 inches: 50.0%**</span>
 
 ***b) Find and interpret the chance that the length of a randomly selected rattlesnake is between 30 and 40 inches.***
-
-The `cdf-normal` function calculates the cumulative distribution function for a standard normal distribution:
-
-$$\Phi(z) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^z e^{-t^2/2} dt$$
-
-This is used to find probabilities for normally distributed variables.
 
 
 ::: {.sourceClojure}
@@ -914,7 +910,7 @@ This is used to find probabilities for normally distributed variables.
   <path d="M 228 41.4375 L 230 41.4375 L 230 469.847656 L 228 469.847656 Z M 228 41.4375 "/>
 </clipPath>
 </defs>
-<g id="surface6">
+<g id="surface201">
 <rect x="0" y="0" width="504" height="504" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
 <g clip-path="url(#clip1)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:0.533489;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(92.156863%,92.156863%,92.156863%);stroke-opacity:1;stroke-miterlimit:10;" d="M 42.152344 401.5625 L 498.519531 401.5625 "/>
@@ -1403,7 +1399,7 @@ This is used to find probabilities for normally distributed variables.
   <path d="M 477 41.4375 L 479 41.4375 L 479 469.847656 L 477 469.847656 Z M 477 41.4375 "/>
 </clipPath>
 </defs>
-<g id="surface11">
+<g id="surface206">
 <rect x="0" y="0" width="504" height="504" style="fill:rgb(100%,100%,100%);fill-opacity:1;stroke:none;"/>
 <g clip-path="url(#clip1)" clip-rule="nonzero">
 <path style="fill:none;stroke-width:0.533489;stroke-linecap:butt;stroke-linejoin:round;stroke:rgb(92.156863%,92.156863%,92.156863%);stroke-opacity:1;stroke-miterlimit:10;" d="M 42.152344 401.5625 L 498.519531 401.5625 "/>
