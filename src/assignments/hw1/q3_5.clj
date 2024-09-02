@@ -7,6 +7,8 @@
 
 (question
   "Question 3 to 5")
+(question
+  "Question 3")
 (sub-question
   "3) Assume that healthy human body temperatures are normally distributed with a mean of 98.02 degrees Fahrenheit and a standard deviation of 0.62 degrees Fahrenheit. A hospital uses 101 degrees Fahrenheit as the lowest body temperature (laser body temperature reading) criterion of having a fever. What percentage of healthy persons would be misclassified as having a fever with this criterion? Explain.")
 
