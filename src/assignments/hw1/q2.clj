@@ -13,6 +13,7 @@
 
 (md "We can visualize the Normal Distribution with the following function:")
 
+
 (comment
   (defn normal-dist-viz [mu sd]
     (let [x-range (range (- mu (* 4 sd)) (+ mu (* 4 sd)) 0.1)
@@ -26,7 +27,9 @@
             :=y          :y
             :=mark-color "lightblue"})))))
 
+
 (normal-dist-viz 42 2)
+
 
 (sub-sub
  "a) Find and interpret the chance that the length of a randomly selected rattlesnake is longer than 42 inches.")
@@ -63,13 +66,22 @@
               (theme_minimal))
           plot->svg))))
 
+
 (let [mu 42 sd 2 x 42]
   (norm-plot-threshold x mu sd :right))
 
 
-(md "The `x->z` function converts a value from a normal distribution to a standard normal distribution:
+(md
+ "The `x->z` function converts a value from a normal distribution to a standard normal distribution:
 
 $$z = \\frac{x - \\mu}{\\sigma}$$
+
+This is used to find probabilities for normally distributed variables.")
+
+(md
+ "The `pnorm` function calculates the cumulative distribution function for a standard normal distribution:
+
+$$\\Phi(z) = \\frac{1}{\\sqrt{2\\pi}} \\int_{-\\infty}^z e^{-t^2/2} dt$$
 
 This is used to find probabilities for normally distributed variables.")
 
@@ -115,15 +127,9 @@ This is used to find probabilities for normally distributed variables.")
               (theme_minimal))
           plot->svg))))
 
+
 (let [x1 30 x2 40 mu 42 sd 2]
   (norm-plot-thresh-btw x1 x2 mu sd))
-
-
-(md "The `pnorm` function calculates the cumulative distribution function for a standard normal distribution:
-
-$$\\Phi(z) = \\frac{1}{\\sqrt{2\\pi}} \\int_{-\\infty}^z e^{-t^2/2} dt$$
-
-This is used to find probabilities for normally distributed variables.")
 
 
 (let [x1 30 x2 40
