@@ -91,27 +91,3 @@
   (answer
    (str "Top 5 percent benefit cost: " (m/approx x))))
 
-(comment
-  (defn left-boundary->x [mu sd left-area]
-    (let [z-score (inv-normal left-area)
-          x-value (z->x z-score mu sd)
-          x-min (- mu (* 2.5 sd))
-          x-max (+ mu (* 2.5 sd))
-          x-range (range x-min x-max 1)
-          norm-dist (r/distribution :normal {:mu mu :sd sd})
-          data (tc/dataset
-                {:x x-range
-                 :y (map #(r/pdf norm-dist %) x-range)})]
-      (-> data
-          (haclo/layer-area
-           {:=x            :x
-            :=y            :y
-            :=mark-color   "lightblue"
-            :=mark-opacity 0.7})
-          (haclo/layer-line
-           {:=x          (m/approx x-value)
-            :=mark-color "darkblue"}))))
-
-  (left-boundary->x 980 40 0.1)
-
-  (concat (range -4 0 0.1) [0]))
