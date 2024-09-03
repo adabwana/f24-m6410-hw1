@@ -31,17 +31,6 @@
     }
   },
   "remoteUser": "vscode",
-  "features": {
-    "ghcr.io/devcontainers/features/common-utils:2": {
-      "installZsh": "false",
-      "username": "vscode",
-      "upgradePackages": "true"
-    }
-  },
-  "mounts": [
-    "source=${localWorkspaceFolder},target=/workspace/probability,type=bind,consistency=cached",
-    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
-  ],
   "runArgs": [
     "--gpus", "all",
     "-e", "DISPLAY=${localEnv:DISPLAY}",
@@ -53,5 +42,16 @@
   "appPort": [
     1971, 1972
   ],
+  // "features": {
+  //   "ghcr.io/devcontainers/features/common-utils:2": {
+  //     "installZsh": "false",
+  //     "username": "vscode",
+  //     "upgradePackages": "true"
+  //   }
+  // },
+  // "mounts": [
+  //   "source=${localWorkspaceFolder},target=/workspace/probability,type=bind,consistency=cached",
+  //   "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
+  // ],
   "postCreateCommand": "echo 'export DISPLAY=host.docker.internal:0' >> ~/.bashrc && quarto check install"
 }
