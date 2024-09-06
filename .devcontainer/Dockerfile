@@ -28,6 +28,7 @@ FROM clojure:temurin-21-tools-deps-bookworm-slim
 
 # Copy Quarto, R, and R packages from builder
 COPY --from=builder /usr/local/bin/quarto /usr/local/bin/quarto
+COPY --from=builder /usr/local/lib/quarto /usr/local/lib/quarto
 COPY --from=builder /usr/lib/R /usr/lib/R
 COPY --from=builder /usr/share/R /usr/share/R
 COPY --from=builder /usr/bin/R /usr/bin/R
@@ -49,6 +50,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     x11-apps \
     r-base \
     r-base-dev \
+    # for Quarto
+    ca-certificates \ 
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -80,3 +83,6 @@ ENV PATH="/usr/local/bin:/usr/bin:${PATH}"
 
 # Set R_HOME environment variable
 ENV R_HOME=/usr/lib/R
+
+# Verify Quarto installation
+RUN quarto check install
