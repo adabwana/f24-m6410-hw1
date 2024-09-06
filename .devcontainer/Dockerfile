@@ -36,7 +36,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install R packages
-RUN R -e "install.packages(c('ggplot2', 'Rserve', 'svglite'), repos='https://cran.rstudio.com/', Ncpus=parallel::detectCores()))"
+RUN R -e "install.packages(c('ggplot2', 'Rserve', 'svglite'), repos='https://cran.rstudio.com/', Ncpus=parallel::detectCores())"
 
 # Create a non-root user and set up sudo privileges
 RUN useradd -ms /bin/bash vscode \
