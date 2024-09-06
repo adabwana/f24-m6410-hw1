@@ -28,7 +28,6 @@ FROM clojure:temurin-21-tools-deps-bookworm-slim
 
 # Copy Quarto, R, and R packages from builder
 COPY --from=builder /usr/local/bin/quarto /usr/local/bin/quarto
-COPY --from=builder /usr/local/lib/quarto /usr/local/lib/quarto
 COPY --from=builder /usr/lib/R /usr/lib/R
 COPY --from=builder /usr/share/R /usr/share/R
 COPY --from=builder /usr/bin/R /usr/bin/R
